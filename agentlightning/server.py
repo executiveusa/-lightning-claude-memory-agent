@@ -271,6 +271,15 @@ class AgentLightningServer:
     def _setup_routes(self):
         """Configure the FastAPI routes that make up the legacy HTTP API."""
 
+        @self._app.get("/health")
+        async def health_check():  # type: ignore
+            """Health check endpoint for Railway and other deployment platforms."""
+            return {
+                "status": "healthy",
+                "service": "agent-lightning",
+                "version": "0.2.1",
+            }
+
         @self._app.get("/task", response_model=TaskIfAny)
         async def next_task() -> TaskIfAny:  # type: ignore
             """Provide the next available task to a client."""
