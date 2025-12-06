@@ -1,0 +1,263 @@
+{
+  "project": "agent-lightning",
+  "version": "1.0.0",
+  "description": "Agent Lightning deployment secrets specification for Railway zero-secrets bootstrapper",
+  "core": [
+    {
+      "name": "OPENAI_API_KEY",
+      "description": "OpenAI API key for LLM inference",
+      "format": "sk-...",
+      "required": true,
+      "default": "token-abc123",
+      "example": "sk-proj-1234567890abcdef",
+      "validation": "^sk-[a-zA-Z0-9-_]+$"
+    },
+    {
+      "name": "OPENAI_BASE_URL",
+      "description": "OpenAI API base URL (can be proxy or vLLM endpoint)",
+      "format": "https://...",
+      "required": true,
+      "default": "https://api.openai.com/v1",
+      "example": "https://api.openai.com/v1"
+    },
+    {
+      "name": "OPENAI_API_BASE",
+      "description": "Alternative OpenAI API base URL (legacy compatibility)",
+      "format": "https://...",
+      "required": false,
+      "default": "https://api.openai.com/v1",
+      "example": "https://api.openai.com/v1"
+    }
+  ],
+  "optional": [
+    {
+      "name": "TINKER_API_KEY",
+      "description": "Tinker API key for fine-tuning via Tinker service",
+      "format": "string",
+      "required": false,
+      "default": "",
+      "example": "tinker_12345abcdef",
+      "module": "tinker",
+      "disabled_behavior": "Tinker training disabled, local training only"
+    },
+    {
+      "name": "WANDB_API_KEY",
+      "description": "Weights & Biases API key for experiment tracking",
+      "format": "string",
+      "required": false,
+      "default": "",
+      "example": "1234567890abcdef1234567890abcdef12345678",
+      "module": "wandb",
+      "disabled_behavior": "W&B logging disabled, metrics logged locally only"
+    },
+    {
+      "name": "AGENTOPS_API_KEY",
+      "description": "AgentOps API key for agent monitoring and tracing",
+      "format": "string",
+      "required": false,
+      "default": "dummy",
+      "example": "ao_1234567890abcdef",
+      "module": "agentops",
+      "disabled_behavior": "AgentOps uses internal dummy endpoint"
+    },
+    {
+      "name": "AGENTOPS_API_ENDPOINT",
+      "description": "AgentOps API endpoint URL",
+      "format": "https://...",
+      "required": false,
+      "default": "",
+      "example": "https://api.agentops.ai",
+      "module": "agentops"
+    },
+    {
+      "name": "ANSWERER_LLM",
+      "description": "Model name for answerer agent in Q20 example",
+      "format": "string",
+      "required": false,
+      "default": "gpt-5-mini",
+      "example": "gpt-4.1",
+      "module": "tinker"
+    },
+    {
+      "name": "SEARCH_LLM",
+      "description": "Model name for search agent in Q20 example",
+      "format": "string",
+      "required": false,
+      "default": "gpt-4.1",
+      "example": "gpt-4.1",
+      "module": "tinker"
+    },
+    {
+      "name": "MODEL",
+      "description": "Default model name for SQL agent",
+      "format": "string",
+      "required": false,
+      "default": "gpt-4.1-mini",
+      "example": "gpt-4.1-mini",
+      "module": "spider"
+    },
+    {
+      "name": "VERL_SPIDER_DATA_DIR",
+      "description": "Directory path for Spider dataset in SQL agent",
+      "format": "path",
+      "required": false,
+      "default": "data",
+      "example": "/app/data",
+      "module": "spider"
+    },
+    {
+      "name": "CREWAI_DISABLE_TELEMETRY",
+      "description": "Disable CrewAI telemetry to prevent conflicts with AgentOps",
+      "format": "boolean",
+      "required": false,
+      "default": "true",
+      "example": "true",
+      "module": "crewai"
+    }
+  ],
+  "runtime": [
+    {
+      "name": "AGL_MANAGED_STORE",
+      "description": "Enable Agent Lightning managed store mode",
+      "format": "boolean",
+      "required": false,
+      "default": "false",
+      "example": "true"
+    },
+    {
+      "name": "AGL_CURRENT_ROLE",
+      "description": "Current role in distributed Agent Lightning setup",
+      "format": "string",
+      "required": false,
+      "default": "",
+      "example": "runner"
+    },
+    {
+      "name": "AGL_SERVER_HOST",
+      "description": "Agent Lightning server host",
+      "format": "string",
+      "required": false,
+      "default": "localhost",
+      "example": "agl-server.railway.app"
+    },
+    {
+      "name": "AGL_SERVER_PORT",
+      "description": "Agent Lightning server port",
+      "format": "number",
+      "required": false,
+      "default": "",
+      "example": "8080"
+    },
+    {
+      "name": "PYTHONUTF8",
+      "description": "Enable UTF-8 mode for Python",
+      "format": "boolean",
+      "required": false,
+      "default": "1",
+      "example": "1"
+    }
+  ],
+  "required_secrets": [
+    "OPENAI_API_KEY",
+    "OPENAI_BASE_URL"
+  ],
+  "optional_secrets": [
+    "TINKER_API_KEY",
+    "WANDB_API_KEY",
+    "AGENTOPS_API_KEY",
+    "OPENAI_API_BASE"
+  ],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "OPENAI_API_KEY": {
+        "type": "string",
+        "pattern": "^sk-[a-zA-Z0-9-_]+$",
+        "description": "OpenAI API key"
+      },
+      "OPENAI_BASE_URL": {
+        "type": "string",
+        "format": "uri",
+        "description": "OpenAI API base URL"
+      },
+      "TINKER_API_KEY": {
+        "type": "string",
+        "description": "Tinker API key (optional)"
+      },
+      "WANDB_API_KEY": {
+        "type": "string",
+        "description": "Weights & Biases API key (optional)"
+      },
+      "AGENTOPS_API_KEY": {
+        "type": "string",
+        "description": "AgentOps API key (optional)"
+      }
+    },
+    "required": ["OPENAI_API_KEY", "OPENAI_BASE_URL"]
+  },
+  "modules": {
+    "core": {
+      "name": "Core LLM Integration",
+      "description": "Essential OpenAI API integration for inference",
+      "secrets": ["OPENAI_API_KEY", "OPENAI_BASE_URL", "OPENAI_API_BASE"]
+    },
+    "tinker": {
+      "name": "Tinker Fine-tuning",
+      "description": "Optional Tinker service integration for model fine-tuning",
+      "secrets": ["TINKER_API_KEY", "ANSWERER_LLM", "SEARCH_LLM"],
+      "stub_mode": "Use local training without Tinker API"
+    },
+    "wandb": {
+      "name": "Weights & Biases",
+      "description": "Optional experiment tracking and monitoring",
+      "secrets": ["WANDB_API_KEY"],
+      "stub_mode": "Log metrics to local files only"
+    },
+    "agentops": {
+      "name": "AgentOps Monitoring",
+      "description": "Optional agent monitoring and tracing service",
+      "secrets": ["AGENTOPS_API_KEY", "AGENTOPS_API_ENDPOINT"],
+      "stub_mode": "Use internal dummy endpoint at localhost"
+    },
+    "spider": {
+      "name": "Spider SQL Dataset",
+      "description": "SQL agent training with Spider dataset",
+      "secrets": ["MODEL", "VERL_SPIDER_DATA_DIR"],
+      "stub_mode": "Use default model and local data directory"
+    },
+    "crewai": {
+      "name": "CrewAI Integration",
+      "description": "Multi-agent orchestration with CrewAI",
+      "secrets": ["CREWAI_DISABLE_TELEMETRY"],
+      "stub_mode": "Telemetry disabled by default"
+    }
+  },
+  "deployment": {
+    "railway": {
+      "requires_build": true,
+      "runtime": "python-3.10",
+      "package_manager": "pip",
+      "install_command": "pip install -e .",
+      "start_command": "python -m agentlightning.server",
+      "healthcheck_path": "/health",
+      "port": 8080
+    },
+    "coolify": {
+      "docker_compose": false,
+      "buildpack": "nixpacks",
+      "port": 8080
+    }
+  },
+  "cost_protection": {
+    "max_monthly_cost_usd": 5.0,
+    "free_tier_limits": {
+      "railway": {
+        "execution_hours": 500,
+        "ram_mb": 512,
+        "cpu_cores": 0.5
+      }
+    },
+    "shutdown_on_breach": true,
+    "maintenance_mode": true
+  }
+}

@@ -1,0 +1,38 @@
+# Nixpacks build configuration for Agent Lightning
+# Optimized for Railway deployment with minimal resource usage
+
+[phases.setup]
+nixPkgs = ["python310", "pip"]
+aptPkgs = []
+
+[phases.install]
+# Install minimal dependencies for zero-secrets deployment
+# Exclude heavy optional dependencies (GPU, training frameworks)
+cmds = [
+  "pip install --no-cache-dir --upgrade pip setuptools wheel",
+  "pip install --no-cache-dir -e ."
+]
+
+[phases.build]
+# No build phase needed for Python - skip to reduce deployment time
+cmds = []
+
+[start]
+cmd = "python -m agentlightning.server"
+
+[variables]
+# Build-time optimizations
+PIP_NO_CACHE_DIR = "1"
+PIP_DISABLE_PIP_VERSION_CHECK = "1"
+PYTHONUNBUFFERED = "1"
+PYTHONDONTWRITEBYTECODE = "1"
+
+# Python version specification
+PYTHON_VERSION = "3.10"
+
+# Minimal package installation - exclude GPU and training dependencies
+INSTALL_MINIMAL = "true"
+SKIP_GPU_PACKAGES = "true"
+
+[ports]
+8080 = "web"

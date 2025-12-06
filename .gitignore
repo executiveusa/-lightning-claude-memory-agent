@@ -207,3 +207,11 @@ cython_debug/
 
 # Claude
 .claude/*.local.json
+
+# Railway Zero-Secrets Deployment System
+# Never commit actual secrets to version control
+master.secrets.json
+*.secret
+*.secrets
+.railway-env
+railway-env-backup.json
