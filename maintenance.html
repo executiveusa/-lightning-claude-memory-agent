@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Lightning - Maintenance Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        .status {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .info-box {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-box li strong {
+            color: #333;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo pulsing">⚡</div>
+        <h1>Agent Lightning</h1>
+        <div class="status">🔧 Maintenance Mode Active</div>
+        
+        <p>
+            We're currently performing system maintenance to optimize your experience. 
+            Our application will be back online shortly.
+        </p>
+        
+        <div class="info-box">
+            <h3>Why is this happening?</h3>
+            <ul>
+                <li><strong>Free Tier Protection:</strong> Cost limits reached for current billing period</li>
+                <li><strong>Resource Optimization:</strong> Preventing unexpected charges</li>
+                <li><strong>Auto-Recovery:</strong> Service will resume at the start of next billing cycle</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h3>What can you do?</h3>
+            <ul>
+                <li>✅ Wait for automatic service restoration (typically at month start)</li>
+                <li>✅ Check our <a href="https://github.com/executiveusa/-lightning-claude-memory-agent" class="link">GitHub repository</a> for updates</li>
+                <li>✅ Consider upgrading to a paid tier for uninterrupted service</li>
+                <li>✅ Deploy to your own infrastructure using our deployment guides</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>
+                Need immediate access? 
+                <a href="https://github.com/executiveusa/-lightning-claude-memory-agent/blob/main/DEPLOYMENT.md" class="link">Deploy your own instance</a>
+            </p>
+            <p style="margin-top: 10px;">
+                Questions? Check our 
+                <a href="https://github.com/executiveusa/-lightning-claude-memory-agent/blob/main/COOLIFY_MIGRATION.md" class="link">migration guide</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
