@@ -111,8 +111,15 @@ class IntegrationStubber:
         ]
 
         # Load from .agents
-        with open(self.agents_file) as f:
-            agents_data = json.load(f)
+        try:
+            with open(self.agents_file) as f:
+                agents_data = json.load(f)
+        except FileNotFoundError:
+            print(f"Error: .agents file not found at {self.agents_file}")
+            sys.exit(1)
+        except json.JSONDecodeError as e:
+            print(f"Error: .agents file is not valid JSON: {e}")
+            sys.exit(1)
 
         # Core secrets
         for secret in agents_data.get("core", []):
@@ -163,10 +170,13 @@ class IntegrationStubber:
             ])
 
         # Write file
-        with open(output_file, "w") as f:
-            f.write("\n".join(lines))
-
-        print(f"✅ Environment template generated: {output_file}")
+        try:
+            with open(output_file, "w") as f:
+                f.write("\n".join(lines))
+            print(f"✅ Environment template generated: {output_file}")
+        except IOError as e:
+            print(f"Error: Failed to write template file: {e}")
+            sys.exit(1)
 
     def validate_secrets(self) -> bool:
         """Validate that required secrets are configured."""
