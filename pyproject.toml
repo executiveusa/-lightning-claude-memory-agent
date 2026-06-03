@@ -381,3 +381,6 @@ extend_skip_glob = [
   "data/**",
   "_version.py",
 ]
+
+[tool.vercel]
+entrypoint = "agentlightning.llm_proxy:app"
