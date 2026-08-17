@@ -11,6 +11,7 @@ from .env_var import *
 from .execution import *
 from .litagent import *
 from .llm_proxy import *
+from .terabithia_api import *
 from .logging import configure_logger  # deprecated  # type: ignore
 from .logging import setup as setup_logging  # type: ignore
 from .logging import setup_module as setup_module_logging  # type: ignore
